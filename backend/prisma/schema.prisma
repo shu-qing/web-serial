@@ -1,0 +1,347 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String               @id @default(cuid())
+  email           String               @unique @db.VarChar(255)
+  passwordHash    String?              @db.VarChar(255)
+  username        String               @db.VarChar(100)
+  avatar          String?              @db.VarChar(500)
+  authProvider    String               @default("email") @db.VarChar(20)
+  role            String               @default("user") @db.VarChar(20)
+  status          String               @default("active") @db.VarChar(20)
+  isEmailVerified Boolean              @default(false)
+  emailVerifyToken String?             @db.VarChar(255)
+  emailVerifyExpiry DateTime?
+  lastLoginAt     DateTime?
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  projects        Project[]
+  histories       SendHistory[]
+  profiles        SerialProfile[]
+  sessionEvents   SessionEvent[]
+  sessions        SessionParticipant[]
+  ownedSessions   Session[]            @relation("SessionOwner")
+  testLibraries   TestLibrary[]
+  preference      UserPreference?
+  adminLogs       AdminLog[]
+  errorLogs       ErrorLog[]
+  feedbacks       Feedback[]
+
+  @@index([email])
+  @@index([authProvider])
+  @@index([createdAt])
+  @@index([role])
+  @@index([status])
+  @@map("users")
+}
+
+model SerialProfile {
+  id              String   @id @default(cuid())
+  userId          String
+  name            String   @db.VarChar(100)
+  deviceId        String?  @db.VarChar(50)
+  baudRate        Int      @default(115200)
+  dataBits        Int      @default(8)
+  parity          String   @default("none") @db.VarChar(10)
+  stopBits        Float    @default(1.0)
+  flowControl     String   @default("none") @db.VarChar(10)
+  lineEndingSend  String   @default("none") @db.VarChar(10)
+  lineEndingParse String   @default("auto") @db.VarChar(10)
+  encoding        String   @default("utf-8") @db.VarChar(20)
+  bufferSize      Int      @default(65536)
+  isDefault       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, name])
+  @@index([userId])
+  @@index([userId, isDefault])
+  @@index([deviceId])
+  @@map("serial_profiles")
+}
+
+model Project {
+  id           String        @id @default(cuid())
+  userId       String
+  name         String        @db.VarChar(200)
+  description  String?
+  config       Json?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  testLibraries TestLibrary[]
+
+  @@index([userId])
+  @@index([userId, createdAt])
+  @@map("projects")
+}
+
+model SendHistory {
+  id        String   @id @default(cuid())
+  userId    String
+  content   String
+  encoding  String   @default("utf-8") @db.VarChar(20)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, createdAt])
+  @@map("send_histories")
+}
+
+model UserPreference {
+  userId          String   @id
+  theme           String   @default("light") @db.VarChar(10)
+  fontSize        Int      @default(14)
+  fontFamily      String   @default("Monaco") @db.VarChar(100)
+  lineHeight      String   @default("normal") @db.VarChar(20)
+  autoScroll      Boolean  @default(true)
+  showLineNumber  Boolean  @default(false)
+  timestampFormat String   @default("HH:mm:ss.SSS") @db.VarChar(20)
+  highlightRules  Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+model Session {
+  id                String               @id @default(cuid())
+  ownerId           String
+  name              String               @db.VarChar(200)
+  description       String?
+  mode              String               @default("share") @db.VarChar(20)
+  inviteCode        String               @unique @db.VarChar(10)
+  connectionCode    String?              @unique @db.VarChar(10)
+  passwordHash      String?              @db.VarChar(255)
+  controlMode       String               @default("request") @db.VarChar(20)
+  autoAcceptControl Boolean              @default(false)
+  allowChat         Boolean              @default(true)
+  allowClipboard    Boolean              @default(false)
+  status            String               @default("created") @db.VarChar(20)
+  expiresAt         DateTime?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  events            SessionEvent[]
+  participants      SessionParticipant[]
+  owner             User                 @relation("SessionOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@index([ownerId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([expiresAt])
+  @@index([inviteCode])
+  @@index([connectionCode])
+  @@map("sessions")
+}
+
+model SessionParticipant {
+  id           String   @id @default(cuid())
+  sessionId    String
+  userId       String?
+  username     String   @db.VarChar(100)
+  role         String   @default("guest") @db.VarChar(20)
+  hasControl   Boolean  @default(false)
+  hasDevice    Boolean  @default(false)
+  joinedAt     DateTime @default(now())
+  lastActiveAt DateTime @default(now())
+  session      Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([userId])
+  @@map("session_participants")
+}
+
+model SessionEvent {
+  id        String   @id @default(cuid())
+  sessionId String
+  userId    String?
+  eventType String   @db.VarChar(50)
+  payload   Json?
+  createdAt DateTime @default(now())
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@index([sessionId])
+  @@index([sessionId, createdAt])
+  @@index([eventType])
+  @@map("session_events")
+}
+
+model TestLibrary {
+  id          String      @id @default(cuid())
+  userId      String
+  projectId   String
+  name        String      @db.VarChar(200)
+  description String?
+  deviceType  String?     @db.VarChar(100)
+  protocol    String?     @db.VarChar(100)
+  tags        String[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project     Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  suites      TestSuite[]
+
+  @@index([userId])
+  @@index([userId, createdAt])
+  @@index([projectId])
+  @@index([userId, projectId])
+  @@map("test_libraries")
+}
+
+model TestSuite {
+  id          String      @id @default(cuid())
+  libraryId   String
+  name        String      @db.VarChar(200)
+  description String?
+  order       Int         @default(0)
+  tags        String[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  cases       TestCase[]
+  library     TestLibrary @relation(fields: [libraryId], references: [id], onDelete: Cascade)
+
+  @@index([libraryId])
+  @@index([libraryId, order])
+  @@map("test_suites")
+}
+
+model TestCase {
+  id               String       @id @default(cuid())
+  suiteId          String
+  name             String       @db.VarChar(200)
+  description      String?
+  order            Int          @default(0)
+  command          String
+  encoding         String       @default("utf-8") @db.VarChar(20)
+  lineEnding       String       @default("none") @db.VarChar(10)
+  expectedResponse String?
+  responsePattern  String?
+  timeout          Int          @default(1000)
+  assertions       Json?
+  preconditions    Json?
+  variables        Json?
+  checksumType     String?      @db.VarChar(50)
+  checksumPosition String?      @db.VarChar(20)
+  retryCount       Int          @default(0)
+  retryDelay       Int          @default(1000)
+  continueOnFail   Boolean      @default(false)
+  lastRunAt        DateTime?
+  lastResult       String?      @db.VarChar(20)
+  lastError        String?
+  lastDuration     Int?
+  runCount         Int          @default(0)
+  passCount        Int          @default(0)
+  failCount        Int          @default(0)
+  tags             String[]
+  isEnabled        Boolean      @default(true)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  suite            TestSuite    @relation(fields: [suiteId], references: [id], onDelete: Cascade)
+  results          TestResult[]
+
+  @@index([suiteId])
+  @@index([suiteId, order])
+  @@index([isEnabled])
+  @@map("test_cases")
+}
+
+model TestResult {
+  id               String   @id @default(cuid())
+  testCaseId       String
+  result           String   @db.VarChar(20)
+  duration         Int
+  sentCommand      String
+  receivedData     String?
+  errorMessage     String?
+  assertionResults Json?
+  variables        Json?
+  metadata         Json?
+  createdAt        DateTime @default(now())
+  testCase         TestCase @relation(fields: [testCaseId], references: [id], onDelete: Cascade)
+
+  @@index([testCaseId])
+  @@index([testCaseId, createdAt])
+  @@index([result])
+  @@map("test_results")
+}
+
+model AdminLog {
+  id         String   @id @default(cuid())
+  adminId    String
+  action     String   @db.VarChar(100)
+  targetId   String?  @db.VarChar(50)
+  targetType String?  @db.VarChar(50)
+  details    Json?
+  ipAddress  String?  @db.VarChar(50)
+  createdAt  DateTime @default(now())
+  admin      User     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
+  @@index([action])
+  @@index([createdAt])
+  @@index([targetId])
+  @@map("admin_logs")
+}
+
+model SystemLog {
+  id        String   @id @default(cuid())
+  level     String   @db.VarChar(20)
+  category  String   @db.VarChar(50)
+  message   String
+  details   Json?
+  createdAt DateTime @default(now())
+
+  @@index([level])
+  @@index([category])
+  @@index([createdAt])
+  @@map("system_logs")
+}
+
+model ErrorLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  errorType String   @db.VarChar(100)
+  message   String
+  stack     String?  @db.Text
+  request   Json?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([errorType])
+  @@index([createdAt])
+  @@map("error_logs")
+}
+
+model Feedback {
+  id          String   @id @default(cuid())
+  userId      String?
+  type        String   @db.VarChar(20) // 'bug', 'suggestion', 'question'
+  title       String   @db.VarChar(200)
+  description String
+  contact     String?  @db.VarChar(200)
+  images      String[] // 图片URL数组
+  status      String   @default("pending") @db.VarChar(20) // 'pending', 'processing', 'resolved', 'closed'
+  adminReply  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([type])
+  @@map("feedbacks")
+}

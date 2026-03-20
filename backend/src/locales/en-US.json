@@ -1,0 +1,46 @@
+{
+  "errors": {
+    "unauthorized": "Unauthorized",
+    "forbidden": "Forbidden",
+    "notFound": "Resource not found",
+    "validationError": "Validation failed",
+    "invalidCredentials": "Invalid email or password",
+    "emailExists": "Email already exists",
+    "usernameExists": "Username already taken",
+    "userNotFound": "User not found",
+    "projectNotFound": "Project not found",
+    "sessionNotFound": "Session not found",
+    "testLibraryNotFound": "Test library not found",
+    "testSuiteNotFound": "Test suite not found",
+    "testCaseNotFound": "Test case not found",
+    "tokenInvalid": "Invalid token",
+    "tokenExpired": "Token expired",
+    "serverError": "Internal server error",
+    "rateLimitExceeded": "Too many requests, please try again later",
+    "authRateLimitExceeded": "Too many login attempts, please try again later",
+    "missingAuthToken": "Missing authentication token",
+    "adminAccessRequired": "Admin access required",
+    "accountDisabled": "Account has been disabled",
+    "invalidPassword": "Invalid password format",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "invalidEmail": "Invalid email format",
+    "sessionFull": "Session is full",
+    "sessionEnded": "Session has ended",
+    "invalidInviteCode": "Invalid invite code",
+    "incorrectPassword": "Incorrect password"
+  },
+  "success": {
+    "loginSuccess": "Login successful",
+    "registerSuccess": "Registration successful",
+    "logoutSuccess": "Logout successful",
+    "createSuccess": "Created successfully",
+    "updateSuccess": "Updated successfully",
+    "deleteSuccess": "Deleted successfully",
+    "saveSuccess": "Saved successfully",
+    "sessionCreated": "Session created successfully",
+    "sessionJoined": "Joined session successfully",
+    "sessionLeft": "Left session",
+    "sessionEnded": "Session ended"
+  }
+}
+

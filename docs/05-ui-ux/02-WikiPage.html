@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Serial Debugger - Wiki</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./layout-styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- 顶部导航栏 -->
+    <nav class="bg-white border-b border-gray-200 h-14 flex items-center px-6 shadow-sm sticky top-0 z-50">
+        <!-- 左侧：Logo -->
+        <a href="./01-HomePage.html" target="_blank" class="flex items-center space-x-2">
+            <img src="../../frontend/public/logo.svg" alt="Web Serial Logo" class="w-7 h-7" />
+            <span class="text-base font-semibold text-gray-900">Web Serial</span>
+        </a>
+        
+        <!-- 导航链接 -->
+        <div class="flex items-center space-x-6 ml-8">
+            <a href="./01-HomePage.html" target="_blank" class="text-sm font-medium text-gray-600 hover:text-gray-900">在线工具</a>
+            <a href="./02-WikiPage.html" class="text-sm font-medium text-blue-600 hover:text-blue-700 active">Wiki</a>
+        </div>
+        
+        <div class="flex-1"></div>
+        
+        <!-- 右侧：搜索框 -->
+        <div class="w-64 relative">
+            <svg class="wiki-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <input type="text" class="wiki-search-nav" placeholder="搜索文档...">
+        </div>
+    </nav>
+    
+    <!-- Wiki 布局 -->
+    <div class="wiki-layout">
+        <!-- 左侧边栏 -->
+        <aside class="wiki-sidebar scrollbar-thin">
+            <!-- 入门指南 -->
+            <div class="wiki-nav-section">
+                <h3 class="wiki-nav-title">
+                    <svg class="wiki-nav-collapse-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                    入门指南
+                </h3>
+                <ul class="wiki-nav-list">
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">什么是串口调试<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link active">快速开始<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">基本概念<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">常见应用场景<span class="wiki-nav-count">1</span></a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 使用教程 -->
+            <div class="wiki-nav-section">
+                <h3 class="wiki-nav-title">
+                    <svg class="wiki-nav-collapse-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                    使用教程
+                </h3>
+                <ul class="wiki-nav-list">
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">连接设备教程<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">配置参数教程<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">数据收发教程<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">命令库使用<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">数据分析教程<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">远程协作教程<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">AI 功能教程<span class="wiki-nav-count">2</span></a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 功能详解 -->
+            <div class="wiki-nav-section">
+                <h3 class="wiki-nav-title">
+                    <svg class="wiki-nav-collapse-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                    功能详解
+                </h3>
+                <ul class="wiki-nav-list">
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">串口参数详解<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">编码格式详解<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">高级功能详解<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">校验码详解<span class="wiki-nav-count">1</span></a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 常见问题 -->
+            <div class="wiki-nav-section">
+                <h3 class="wiki-nav-title">
+                    <svg class="wiki-nav-collapse-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                    常见问题 (FAQ)
+                </h3>
+                <ul class="wiki-nav-list">
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">连接问题<span class="wiki-nav-count">5</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">配置问题<span class="wiki-nav-count">4</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">使用问题<span class="wiki-nav-count">6</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">故障排查<span class="wiki-nav-count">8</span></a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 最佳实践 -->
+            <div class="wiki-nav-section">
+                <h3 class="wiki-nav-title">
+                    <svg class="wiki-nav-collapse-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                    最佳实践
+                </h3>
+                <ul class="wiki-nav-list">
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">调试技巧<span class="wiki-nav-count">3</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">性能优化<span class="wiki-nav-count">2</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">安全建议<span class="wiki-nav-count">2</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">案例分析<span class="wiki-nav-count">4</span></a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 硬件兼容性 -->
+            <div class="wiki-nav-section">
+                <h3 class="wiki-nav-title">
+                    <svg class="wiki-nav-collapse-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                    硬件兼容性
+                </h3>
+                <ul class="wiki-nav-list">
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">支持的设备列表<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">设备配置建议<span class="wiki-nav-count">1</span></a>
+                    </li>
+                    <li class="wiki-nav-item">
+                        <a href="#" class="wiki-nav-link">设备驱动问题<span class="wiki-nav-count">3</span></a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        
+        <!-- 右侧内容区 -->
+        <article class="wiki-content scrollbar-thin">
+            <!-- 面包屑导航 -->
+            <nav class="wiki-breadcrumb">
+                <a href="./01-HomePage.html" target="_blank">首页</a> > 
+                <a href="./02-WikiPage.html">Wiki</a> > 
+                <a href="#">入门指南</a> > 
+                <span>快速开始</span>
+            </nav>
+            
+            <!-- 文章头部 -->
+            <header class="wiki-article-header">
+                <h1 class="wiki-article-title">快速开始</h1>
+                <div class="wiki-article-meta">
+                    <span>📅 最后更新：2025-11-02</span>
+                    <span>🏷️ 标签：入门、教程、基础</span>
+                    <span>👁️ 阅读时间：约 5 分钟</span>
+                </div>
+            </header>
+            
+            <!-- 目录 -->
+            <div class="wiki-toc">
+                <h4>📑 目录</h4>
+                <ul>
+                    <li><a href="#install">1. 安装与运行</a></li>
+                    <li><a href="#connect">2. 连接设备</a></li>
+                    <li><a href="#config">3. 配置串口参数</a></li>
+                    <li><a href="#send-receive">4. 发送和接收数据</a></li>
+                    <li><a href="#next-steps">5. 下一步</a></li>
+                </ul>
+            </div>
+            
+            <!-- 文章内容 -->
+            <div class="wiki-article-content">
+                <p>本教程将帮助您快速上手 Web Serial Debugger，完成第一次串口调试任务。整个过程只需 5 分钟！</p>
+                
+                <h2 id="install">1. 安装与运行</h2>
+                <p>Web Serial Debugger 提供多种使用方式：</p>
+                
+                <h3>方式一：在线使用（推荐新手）</h3>
+                <ul>
+                    <li>直接访问 <a href="./01-HomePage.html" target="_blank" style="color: #3B82F6; text-decoration: underline;">在线版本</a></li>
+                    <li>无需安装，打开浏览器即可使用</li>
+                    <li>需要使用 Chrome/Edge 89+ 或其他支持 Web Serial API 的浏览器</li>
+                </ul>
+                
+                <h3>方式二：桌面应用（推荐专业用户）</h3>
+                <ul>
+                    <li>前往 <a href="./02-下载页.html" style="color: #3B82F6; text-decoration: underline;">下载页面</a> 下载对应平台的安装包</li>
+                    <li>支持 Windows、macOS、Linux</li>
+                    <li>提供更完整的串口支持和离线使用能力</li>
+                </ul>
+                
+                <h2 id="connect">2. 连接设备</h2>
+                <p>连接串口设备是调试的第一步：</p>
+                
+                <ol>
+                    <li><strong>连接硬件</strong>：将串口设备通过 USB 数据线连接到电脑</li>
+                    <li><strong>点击连接按钮</strong>：在界面顶部找到蓝色的"连接"按钮并点击</li>
+                    <li><strong>选择设备</strong>：在弹出的设备列表中选择您的串口设备（通常显示为 COM 端口或设备名称）</li>
+                    <li><strong>确认连接</strong>：点击"连接"后，状态指示灯将变为绿色 🟢</li>
+                </ol>
+                
+                <pre><code>💡 提示：如果看不到您的设备，请检查：
+- 设备是否正确连接到电脑
+- 是否安装了必要的驱动程序
+- 是否有其他程序占用了串口</code></pre>
+                
+                <h2 id="config">3. 配置串口参数</h2>
+                <p>在连接设备之前，您可能需要配置串口参数以匹配设备要求：</p>
+                
+                <h3>常用参数说明</h3>
+                <ul>
+                    <li><strong>波特率（Baud Rate）</strong>：数据传输速度，常用值有 9600、115200 等</li>
+                    <li><strong>数据位（Data Bits）</strong>：每个字符的位数，通常为 8 位</li>
+                    <li><strong>校验位（Parity）</strong>：错误检测方式，通常选择 None（无校验）</li>
+                    <li><strong>停止位（Stop Bits）</strong>：帧结束标志，通常为 1 位</li>
+                </ul>
+                
+                <h3>示例配置</h3>
+                <p>大多数设备使用以下标准配置：</p>
+                <pre><code>波特率：115200
+数据位：8
+校验位：None
+停止位：1</code></pre>
+                
+                <h2 id="send-receive">4. 发送和接收数据</h2>
+                
+                <h3>接收数据</h3>
+                <p>连接成功后，设备发送的数据将自动显示在接收区：</p>
+                <ul>
+                    <li>每条数据显示时间戳和方向标识（← 表示接收）</li>
+                    <li>可以使用搜索功能快速定位关键数据</li>
+                    <li>勾选"自动滚动"可自动跳转到最新数据</li>
+                    <li>勾选"自动换行"可完整显示长文本</li>
+                </ul>
+                
+                <h3>发送数据</h3>
+                <p>向设备发送指令非常简单：</p>
+                <ol>
+                    <li>在发送区输入框中输入要发送的数据（如 <code>AT</code>）</li>
+                    <li>选择编码格式（ASCII 或 HEX）</li>
+                    <li>选择行结束符（通常为 <code>\r\n</code>）</li>
+                    <li>点击"发送"按钮</li>
+                </ol>
+                
+                <h3>使用命令库</h3>
+                <p>右侧的命令库可以快速发送常用指令：</p>
+                <ul>
+                    <li>点击命令项右侧的 ▶️ 按钮直接发送</li>
+                    <li>点击 📋 按钮复制命令到剪贴板</li>
+                    <li>点击 ✏️ 按钮编辑命令</li>
+                    <li>使用"AI 导入"功能快速导入设备手册中的命令</li>
+                </ul>
+                
+                <h2 id="next-steps">5. 下一步</h2>
+                <p>恭喜！您已经完成了第一次串口调试。接下来您可以：</p>
+                
+                <ul>
+                    <li>📖 学习 <a href="#" style="color: #3B82F6; text-decoration: underline;">数据分析教程</a>，了解如何分析调试数据</li>
+                    <li>🤖 探索 <a href="#" style="color: #3B82F6; text-decoration: underline;">AI 功能教程</a>，使用 AI 自动导入命令和识别校验码</li>
+                    <li>🌐 尝试 <a href="#" style="color: #3B82F6; text-decoration: underline;">远程协作</a>，与团队成员共享调试会话</li>
+                    <li>📊 查看 <a href="#" style="color: #3B82F6; text-decoration: underline;">最佳实践</a>，提升调试效率</li>
+                </ul>
+                
+                <h3>需要帮助？</h3>
+                <p>如果您遇到问题，可以：</p>
+                <ul>
+                    <li>查看 <a href="#" style="color: #3B82F6; text-decoration: underline;">常见问题 (FAQ)</a></li>
+                    <li>阅读 <a href="#" style="color: #3B82F6; text-decoration: underline;">故障排查指南</a></li>
+                    <li>在 <a href="#" style="color: #3B82F6; text-decoration: underline;">GitHub</a> 上提交问题</li>
+                </ul>
+            </div>
+            
+            <!-- 相关文章 -->
+            <div class="wiki-related">
+                <h4>📚 相关文章</h4>
+                <div class="wiki-related-list">
+                    <a href="#" class="wiki-related-item">
+                        <h5>什么是串口调试</h5>
+                        <p>了解串口通信的基本概念和应用场景</p>
+                    </a>
+                    <a href="#" class="wiki-related-item">
+                        <h5>连接设备教程</h5>
+                        <p>详细的设备连接步骤和常见问题解决</p>
+                    </a>
+                    <a href="#" class="wiki-related-item">
+                        <h5>串口参数详解</h5>
+                        <p>深入了解波特率、数据位等参数的含义</p>
+                    </a>
+                    <a href="#" class="wiki-related-item">
+                        <h5>命令库使用教程</h5>
+                        <p>学习如何高效管理和使用命令库</p>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <script src="./layout-script.js"></script>
+</body>
+</html>
+

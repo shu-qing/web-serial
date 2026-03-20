@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+**/dist/
+**/build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+**/.env
+# 允许 .env.production 用于部署（但请确保不包含真实密码）
+# .env.production
+
+# IDE
+.vscode/sftp.json
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+**/*.log
+
+# Temporary files
+.tmp/
+*.tmp
+temp/
+tmp/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Internal documentation
+.deployment-files.md
+.integration-summary.md
+.root-deployment-update.md
+ROOT_DEPLOY_GUIDE.md
+
+# Sensitive data
+*.pem
+*.key
+*.cert
+*.crt
+id_rsa*
+id_ed25519*
+

@@ -1,0 +1,46 @@
+{
+  "errors": {
+    "unauthorized": "未授权",
+    "forbidden": "禁止访问",
+    "notFound": "资源不存在",
+    "validationError": "数据验证失败",
+    "invalidCredentials": "邮箱或密码错误",
+    "emailExists": "邮箱已被注册",
+    "usernameExists": "用户名已被使用",
+    "userNotFound": "用户不存在",
+    "projectNotFound": "项目不存在",
+    "sessionNotFound": "会话不存在",
+    "testLibraryNotFound": "测试库不存在",
+    "testSuiteNotFound": "测试单不存在",
+    "testCaseNotFound": "测试命令不存在",
+    "tokenInvalid": "令牌无效",
+    "tokenExpired": "令牌已过期",
+    "serverError": "服务器内部错误",
+    "rateLimitExceeded": "请求过于频繁，请稍后再试",
+    "authRateLimitExceeded": "登录请求过于频繁，请稍后再试",
+    "missingAuthToken": "缺少认证令牌",
+    "adminAccessRequired": "需要管理员权限",
+    "accountDisabled": "账号已被禁用",
+    "invalidPassword": "密码格式不正确",
+    "passwordTooShort": "密码至少需要6个字符",
+    "invalidEmail": "邮箱格式不正确",
+    "sessionFull": "会话已满",
+    "sessionEnded": "会话已结束",
+    "invalidInviteCode": "邀请码无效",
+    "incorrectPassword": "密码错误"
+  },
+  "success": {
+    "loginSuccess": "登录成功",
+    "registerSuccess": "注册成功",
+    "logoutSuccess": "退出登录成功",
+    "createSuccess": "创建成功",
+    "updateSuccess": "更新成功",
+    "deleteSuccess": "删除成功",
+    "saveSuccess": "保存成功",
+    "sessionCreated": "会话创建成功",
+    "sessionJoined": "加入会话成功",
+    "sessionLeft": "已离开会话",
+    "sessionEnded": "会话已结束"
+  }
+}
+

@@ -1,0 +1,29 @@
+# robots.txt for www.webserialtool.com
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# 站点地图
+Sitemap: https://www.webserialtool.com/sitemap.xml
+
+# 爬虫友好规则
+Crawl-delay: 1
+
+# 常见爬虫
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+

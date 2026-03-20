@@ -1,0 +1,1411 @@
+/* Web Serial Debugger - Shared Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    overflow: hidden;
+}
+
+/* ==================== 连接状态指示器 ==================== */
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-disconnected {
+    background-color: #EF4444;
+}
+
+.status-connected {
+    background-color: #10B981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    animation: pulse-green 2s ease-in-out infinite;
+}
+
+.status-connecting {
+    background-color: #F59E0B;
+    animation: pulse-yellow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-green {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes pulse-yellow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* ==================== 数据行样式 ==================== */
+.data-line {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 4px 16px;
+    border-bottom: 1px solid #F3F4F6;
+    transition: background-color 0.15s;
+    display: flex;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.data-line:hover {
+    background-color: #F9FAFB;
+}
+
+.timestamp {
+    color: #9CA3AF;
+    margin-right: 12px;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.data-direction-send {
+    color: #3B82F6;
+    font-weight: 600;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.data-direction-receive {
+    color: #10B981;
+    font-weight: 600;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* 数据内容区域 - 默认自动换行 */
+.data-content {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+    flex: 1;
+    min-width: 0;
+}
+
+/* 数据内容区域 - 不换行 */
+.data-content.no-wrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* ==================== 自定义滚动条 ==================== */
+.scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+}
+
+/* ==================== 图标按钮 ==================== */
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.icon-btn:hover {
+    background-color: #F3F4F6;
+}
+
+.icon-btn:active {
+    transform: scale(0.95);
+}
+
+.icon-btn.active {
+    background-color: #EFF6FF;
+    border-color: #3B82F6;
+    color: #3B82F6;
+}
+
+/* ==================== 测试库样式 - 层级结构 ==================== */
+/* 测试库图标按钮 */
+.test-lib-icon-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transition: all 0.2s;
+    cursor: pointer;
+    color: #6B7280;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.test-lib-icon-btn:hover {
+    background-color: #F3F4F6;
+    color: #3B82F6;
+}
+
+.test-lib-icon-btn:active {
+    transform: scale(0.95);
+}
+
+/* 测试单容器 - 整体边框 */
+.test-suite {
+    margin-bottom: 8px;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    background: white;
+    overflow: hidden;
+    transition: all 0.15s;
+}
+
+.test-suite:hover {
+    border-color: #D1D5DB;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 新建测试单按钮 */
+.test-suite.new-suite-btn {
+    border-style: dashed;
+    border-color: #BFDBFE;
+    background: #F0F9FF;
+    cursor: pointer;
+}
+
+.test-suite.new-suite-btn:hover {
+    border-color: #93C5FD;
+    background: #E0F2FE;
+    box-shadow: 0 1px 3px rgba(59, 130, 246, 0.1);
+}
+
+.test-suite.new-suite-btn .test-suite-header {
+    background: transparent;
+    border-bottom: none;
+    padding: 10px;
+}
+
+.test-suite.new-suite-btn .suite-name {
+    cursor: pointer;
+}
+
+/* 测试单头部 - 更简约 */
+.test-suite-header {
+    padding: 8px 10px;
+    background: #F9FAFB;
+    border-bottom: 1px solid #E5E7EB;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.test-suite-header:hover {
+    background: #F3F4F6;
+}
+
+/* 测试单名称 */
+.suite-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    margin-left: 4px;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 测试用例数量和统计 */
+.suite-count {
+    font-size: 11px;
+    color: #6B7280;
+    margin-left: 4px;
+    font-weight: 500;
+}
+
+.suite-count .stat-passed {
+    color: #10B981;
+    font-weight: 600;
+}
+
+.suite-count .stat-failed {
+    color: #EF4444;
+    font-weight: 600;
+}
+
+.suite-count .stat-total {
+    color: #6B7280;
+    font-weight: 500;
+}
+
+/* 测试单描述 - 隐藏以节省空间 */
+.suite-description {
+    display: none;
+}
+
+/* 展开/折叠按钮 */
+.suite-expand-btn {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.15s;
+    cursor: pointer;
+    color: #6B7280;
+    background: transparent;
+    border: none;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.suite-expand-btn:hover {
+    background-color: #E5E7EB;
+    color: #374151;
+}
+
+.suite-expand-btn svg {
+    transition: transform 0.15s;
+}
+
+.suite-expand-btn svg.rotate-90 {
+    transform: rotate(90deg);
+}
+
+/* 测试单操作按钮组 */
+.suite-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+/* 测试单执行按钮 */
+.suite-play-btn {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.15s;
+    cursor: pointer;
+    color: #10B981;
+    background: transparent;
+    border: none;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.suite-play-btn:hover {
+    background: #ECFDF5;
+    color: #059669;
+}
+
+/* 测试单复制按钮 */
+.suite-copy-btn {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.15s;
+    cursor: pointer;
+    color: #6B7280;
+    background: transparent;
+    border: none;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.suite-copy-btn:hover {
+    background: #F3F4F6;
+    color: #374151;
+}
+
+/* 测试单编辑按钮 */
+.suite-edit-btn {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.15s;
+    cursor: pointer;
+    color: #6B7280;
+    background: transparent;
+    border: none;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.suite-edit-btn:hover {
+    background: #F3F4F6;
+    color: #374151;
+}
+
+/* 测试单删除按钮 */
+.suite-delete-btn {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.15s;
+    cursor: pointer;
+    color: #EF4444;
+    background: transparent;
+    border: none;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.suite-delete-btn:hover {
+    background: #FEF2F2;
+    color: #DC2626;
+}
+
+/* 测试用例容器 */
+.test-cases-container {
+    padding: 4px 10px 6px 10px;
+    background: white;
+    transition: all 0.2s ease-out;
+}
+
+/* 测试用例项 - 更简约 */
+.test-case-item {
+    padding: 4px 8px;
+    background: #FAFBFC;
+    border: none;
+    border-bottom: 1px solid #F3F4F6;
+    border-radius: 0;
+    margin-bottom: 0;
+    transition: all 0.2s;
+}
+
+.test-case-item:last-child {
+    border-bottom: none;
+}
+
+.test-case-item:hover {
+    background: #F3F4F6;
+}
+
+/* 新建测试命令按钮 */
+.test-case-item.new-case-btn {
+    background: #F0F9FF;
+    border-bottom: 1px solid #DBEAFE;
+    cursor: pointer;
+}
+
+.test-case-item.new-case-btn:hover {
+    background: #E0F2FE;
+}
+
+.test-case-item.new-case-btn .test-case-name {
+    cursor: pointer;
+    text-align: center;
+}
+
+/* 测试用例状态样式 */
+.test-case-item.status-pending {
+    background: #FAFBFC;
+}
+
+.test-case-item.status-running {
+    background: #FEF3C7;
+    animation: pulse-running 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-running {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+}
+
+.test-case-item.status-passed {
+    background: #D1FAE5;
+    border-left: 3px solid #10B981;
+}
+
+.test-case-item.status-passed:hover {
+    background: #A7F3D0;
+}
+
+.test-case-item.status-failed {
+    background: #FEE2E2;
+    border-left: 3px solid #EF4444;
+}
+
+.test-case-item.status-failed:hover {
+    background: #FECACA;
+}
+
+/* 测试用例名称 */
+.test-case-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #374151;
+    line-height: 1.2;
+}
+
+/* 测试用例代码 */
+.test-case-code {
+    font-size: 11px;
+    color: #6B7280;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    margin-top: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 测试单删除确认弹框 */
+.suite-delete-confirm {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    min-width: 280px;
+    animation: confirmFadeIn 0.2s ease-out;
+}
+
+@keyframes confirmFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.confirm-content {
+    padding: 16px;
+}
+
+.confirm-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 8px;
+}
+
+.confirm-message {
+    font-size: 12px;
+    color: #6B7280;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.confirm-btn {
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.confirm-cancel {
+    background: white;
+    color: #6B7280;
+    border-color: #D1D5DB;
+}
+
+.confirm-cancel:hover {
+    background: #F9FAFB;
+    border-color: #9CA3AF;
+}
+
+.confirm-delete {
+    background: #EF4444;
+    color: white;
+    border-color: #EF4444;
+}
+
+.confirm-delete:hover {
+    background: #DC2626;
+    border-color: #DC2626;
+}
+
+/* 测试单分隔符（已移除） */
+.test-suite-separator {
+    display: none;
+}
+
+/* 旧命令项样式保留用于兼容 */
+.command-item {
+    padding: 4px 8px 3px 8px;
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    margin-bottom: 3px;
+    transition: all 0.2s;
+}
+
+.command-item:hover {
+    background: #F3F4F6;
+    border-color: #D1D5DB;
+}
+
+.command-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #374151;
+    line-height: 1.3;
+}
+
+.command-code {
+    font-size: 10px;
+    color: #6B7280;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    margin-top: 1px;
+    line-height: 1.4;
+}
+
+.command-btn {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.15s;
+    cursor: pointer;
+}
+
+.command-btn:hover {
+    background-color: #E5E7EB;
+}
+
+.command-btn svg {
+    width: 12px;
+    height: 12px;
+}
+
+.command-btn-delete {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.15s;
+    cursor: pointer;
+    color: #9CA3AF;
+}
+
+.command-btn-delete:hover {
+    background-color: #FEF2F2;
+    color: #DC2626;
+}
+
+.command-btn-delete svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ==================== 紧凑型选择器 ==================== */
+.compact-select {
+    padding: 4px 10px;
+    font-size: 12px;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    background: white;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.compact-select:hover {
+    border-color: #D1D5DB;
+    background-color: #F9FAFB;
+}
+
+.compact-select:focus {
+    outline: none;
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.config-label {
+    font-size: 11px;
+    color: #6B7280;
+    margin-right: 4px;
+}
+
+/* ==================== 导航栏激活状态 ==================== */
+nav a.active {
+    color: #3B82F6;
+    font-weight: 600;
+}
+
+/* ==================== 下载页样式 ==================== */
+.download-hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.download-hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.download-hero p {
+    font-size: 18px;
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.download-section {
+    margin-bottom: 48px;
+}
+
+.download-section h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 24px;
+}
+
+.download-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.download-card {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.download-card:hover {
+    border-color: #3B82F6;
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+    transform: translateY(-4px);
+}
+
+.download-card-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    background: #EFF6FF;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3B82F6;
+}
+
+.download-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 8px;
+}
+
+.download-card .version {
+    font-size: 14px;
+    color: #6B7280;
+    margin-bottom: 16px;
+}
+
+.download-card .features {
+    text-align: left;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: #4B5563;
+}
+
+.download-card .features li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.download-card .features li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #10B981;
+    font-weight: bold;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: #3B82F6;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.download-btn:hover {
+    background: #2563EB;
+    transform: scale(1.05);
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.comparison-table th {
+    background: #F9FAFB;
+    font-weight: 600;
+    color: #1F2937;
+}
+
+.comparison-table td {
+    color: #4B5563;
+}
+
+.comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.check-icon {
+    color: #10B981;
+    font-weight: bold;
+}
+
+.cross-icon {
+    color: #EF4444;
+}
+
+/* ==================== 工具栏样式 ==================== */
+.toolbar {
+    min-height: 40px;
+}
+
+/* ==================== 垂直导航栏样式 ==================== */
+.vertical-navbar {
+    transition: all 0.3s ease;
+}
+
+.vertical-navbar-item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    color: #6B7280;
+    text-decoration: none;
+    position: relative;
+}
+
+.vertical-navbar-item:hover {
+    background-color: #F3F4F6;
+    color: #3B82F6;
+}
+
+.vertical-navbar-item:active {
+    transform: scale(0.95);
+}
+
+/* ==================== 面板切换按钮激活状态 ==================== */
+.vertical-navbar-item[data-panel].active {
+    background-color: #EFF6FF;
+    color: #3B82F6;
+}
+
+/* ==================== 侧边栏容器样式 ==================== */
+.sidebar-container {
+    transition: width 0.3s ease, min-width 0.3s ease, opacity 0.3s ease;
+    width: 280px;
+    min-width: 280px;
+    max-width: 50vw;
+    border-left: 1px solid #E5E7EB;
+    position: relative;
+}
+
+.sidebar-container.collapsed {
+    width: 0 !important;
+    min-width: 0 !important;
+    padding: 0;
+    border: none;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.sidebar-container.resizing {
+    transition: none;
+    user-select: none;
+}
+
+/* 侧边栏拖拽调整手柄 */
+.sidebar-resize-handle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    cursor: ew-resize;
+    background: transparent;
+    z-index: 10;
+    transition: background-color 0.2s;
+}
+
+.sidebar-resize-handle:hover {
+    background-color: #3B82F6;
+}
+
+.sidebar-resize-handle:active {
+    background-color: #2563EB;
+}
+
+.sidebar-container.collapsed .sidebar-resize-handle {
+    display: none;
+}
+
+/* ==================== 侧边栏面板样式 ==================== */
+.sidebar-panel {
+    transition: opacity 0.2s;
+}
+
+.sidebar-panel.hidden {
+    display: none;
+}
+
+/* ==================== 用户信息区样式 ==================== */
+.user-info-section {
+    flex-shrink: 0;
+}
+
+/* ==================== 项目管理面板样式 ==================== */
+.project-item {
+    padding: 10px 12px;
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.project-item:hover {
+    background: #F3F4F6;
+    border-color: #D1D5DB;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.project-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.project-time {
+    font-size: 11px;
+    color: #9CA3AF;
+    margin-top: 4px;
+}
+
+.project-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+    color: #6B7280;
+}
+
+.project-btn:hover {
+    background-color: #E5E7EB;
+    color: #3B82F6;
+}
+
+.project-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.project-btn-delete {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+    color: #9CA3AF;
+}
+
+.project-btn-delete:hover {
+    background-color: #FEF2F2;
+    color: #DC2626;
+}
+
+.project-btn-delete svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ==================== 搜索高亮样式 ==================== */
+.search-highlight {
+    background-color: #FEF3C7;
+    color: #92400E;
+    padding: 1px 2px;
+    border-radius: 2px;
+}
+
+.search-current {
+    background-color: #FCD34D;
+    color: #78350F;
+    padding: 1px 2px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px #F59E0B;
+}
+
+.data-line.search-match {
+    background-color: #FFFBEB;
+}
+
+.data-line.search-current-line {
+    background-color: #FEF3C7;
+    border-left: 3px solid #F59E0B;
+}
+
+/* ==================== 可复用按钮样式 ==================== */
+.btn-primary {
+    padding: 0.625rem 1rem;
+    background-color: #EFF6FF;
+    color: #3B82F6;
+    border: 1px solid #BFDBFE;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #DBEAFE;
+    border-color: #93C5FD;
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    padding: 0.625rem 1rem;
+    background-color: white;
+    color: #4B5563;
+    border: 1px solid #D1D5DB;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #F9FAFB;
+}
+
+.btn-gray {
+    padding: 0.625rem 1rem;
+    background-color: #F3F4F6;
+    color: #9CA3AF;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.btn-gray:hover {
+    background-color: #E5E7EB;
+}
+
+.btn-gray:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ==================== 状态卡片样式 ==================== */
+.status-card {
+    padding: 0.75rem;
+    background-color: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.375rem;
+}
+
+/* ==================== Wiki页样式 ==================== */
+.wiki-layout {
+    display: flex;
+    height: calc(100vh - 56px);
+    gap: 0;
+}
+
+.wiki-sidebar {
+    width: 200px;
+    background: white;
+    border-right: 1px solid #E5E7EB;
+    padding: 8px 10px;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+/* 导航栏搜索框样式 */
+.wiki-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #9CA3AF;
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.wiki-search-nav {
+    width: 100%;
+    padding: 6px 12px 6px 34px;
+    border: 1px solid #E5E7EB;
+    font-size: 14px;
+    background: #F9FAFB;
+    transition: all 0.2s;
+}
+
+.wiki-search-nav:focus {
+    outline: none;
+    border-color: #3B82F6;
+    background: white;
+}
+
+/* 当搜索框聚焦时，图标变蓝 */
+.relative:focus-within .wiki-search-icon {
+    color: #3B82F6;
+}
+
+.wiki-search-nav::placeholder {
+    color: #9CA3AF;
+}
+
+.wiki-nav-section {
+    margin-bottom: 8px;
+}
+
+.wiki-nav-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+}
+
+.wiki-nav-title:hover {
+    background: #F9FAFB;
+}
+
+.wiki-nav-collapse-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.wiki-nav-section.collapsed .wiki-nav-collapse-icon {
+    transform: rotate(-90deg);
+}
+
+.wiki-nav-section.collapsed .wiki-nav-list {
+    display: none;
+}
+
+.wiki-nav-list {
+    list-style: none;
+    padding-left: 12px;
+}
+
+.wiki-nav-item {
+    margin-bottom: 1px;
+}
+
+.wiki-nav-link {
+    display: block;
+    padding: 5px 8px;
+    color: #4B5563;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+}
+
+.wiki-nav-link:hover {
+    background: #F9FAFB;
+    color: #1F2937;
+    border-left-color: #E5E7EB;
+}
+
+.wiki-nav-link.active {
+    background: #F9FAFB;
+    color: #3B82F6;
+    font-weight: 500;
+    border-left-color: #3B82F6;
+}
+
+.wiki-nav-count {
+    float: right;
+    color: #9CA3AF;
+    font-size: 11px;
+}
+
+.wiki-content {
+    flex: 1;
+    background: white;
+    border-left: 1px solid #E5E7EB;
+    padding: 24px;
+    overflow-y: auto;
+    min-width: 0;
+}
+
+.wiki-breadcrumb {
+    font-size: 14px;
+    color: #6B7280;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.wiki-breadcrumb a {
+    color: #3B82F6;
+    text-decoration: none;
+}
+
+.wiki-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.wiki-article-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.wiki-article-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1F2937;
+    margin-bottom: 12px;
+}
+
+.wiki-article-meta {
+    font-size: 14px;
+    color: #6B7280;
+}
+
+.wiki-article-meta span {
+    margin-right: 16px;
+}
+
+.wiki-toc {
+    background: #F9FAFB;
+    border-left: 2px solid #3B82F6;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+}
+
+.wiki-toc h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.wiki-toc ul {
+    list-style: none;
+}
+
+.wiki-toc li {
+    margin-bottom: 6px;
+}
+
+.wiki-toc a {
+    color: #4B5563;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.wiki-toc a:hover {
+    color: #3B82F6;
+}
+
+.wiki-article-content {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #374151;
+}
+
+.wiki-article-content h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.wiki-article-content h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-top: 24px;
+    margin-bottom: 10px;
+}
+
+.wiki-article-content p {
+    margin-bottom: 12px;
+}
+
+.wiki-article-content ul,
+.wiki-article-content ol {
+    margin-bottom: 12px;
+    padding-left: 24px;
+}
+
+.wiki-article-content li {
+    margin-bottom: 6px;
+}
+
+.wiki-article-content code {
+    background: #F3F4F6;
+    padding: 2px 6px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    font-size: 14px;
+    color: #DB2777;
+}
+
+.wiki-article-content pre {
+    background: #1F2937;
+    color: #F9FAFB;
+    padding: 16px;
+    overflow-x: auto;
+    margin-bottom: 12px;
+    border-left: 2px solid #3B82F6;
+}
+
+.wiki-article-content pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+.wiki-related {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid #E5E7EB;
+}
+
+.wiki-related h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 12px;
+}
+
+.wiki-related-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+}
+
+.wiki-related-item {
+    padding: 12px;
+    background: #F9FAFB;
+    text-decoration: none;
+    color: #374151;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+}
+
+.wiki-related-item:hover {
+    background: #F3F4F6;
+    border-left-color: #3B82F6;
+}
+
+.wiki-related-item h5 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.wiki-related-item p {
+    font-size: 13px;
+    color: #6B7280;
+}
+
